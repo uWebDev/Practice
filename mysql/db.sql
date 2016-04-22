@@ -36,3 +36,51 @@ COLLATE = utf8_general_ci;
 
 -- Удаление таблицы Страны
 #DROP TABLE IF EXISTS `countries`;
+
+
+
+-- Загрузка данных из csv файла в таблицу Города
+LOAD DATA INFILE '/tmp/cities.csv'
+INTO TABLE `dore`.`cities`
+CHARACTER SET utf8
+FIELDS
+    TERMINATED BY ';'
+    OPTIONALLY ENCLOSED BY '"'
+LINES
+    TERMINATED BY '\n'
+IGNORE 1 LINES
+(`id`, `city`, `countries_id`);
+
+-- Cохраняем данные из таблицы Города в csv файл
+SELECT `id`,`city`, `countries_id`
+INTO OUTFILE '/tmp/cities.csv'
+FIELDS
+    TERMINATED BY ';'
+    OPTIONALLY ENCLOSED BY '"'
+LINES
+    TERMINATED BY '\n'
+FROM `dore`.`cities`;
+
+
+
+-- Загрузка данных из csv файла в таблицу Страны
+LOAD DATA INFILE '/tmp/countries.csv'
+INTO TABLE `dore`.`countries`
+CHARACTER SET utf8
+FIELDS
+    TERMINATED BY ';'
+    OPTIONALLY ENCLOSED BY '"'
+LINES
+    TERMINATED BY '\n'
+IGNORE 1 LINES
+(`id`,`name`, `currency_code`);
+
+-- Cохраняем данные из таблицы Страны в csv файл
+SELECT `id`,`name`, `currency_code`
+INTO OUTFILE '/tmp/countries.csv'
+FIELDS
+    TERMINATED BY ';'
+    OPTIONALLY ENCLOSED BY '"'
+LINES
+    TERMINATED BY '\n'
+FROM `dore`.`countries` GROUP BY `id`;
