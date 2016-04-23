@@ -84,3 +84,12 @@ FIELDS
 LINES
     TERMINATED BY '\n'
 FROM `dore`.`countries` GROUP BY `id`;
+
+
+
+-- Объединение таблиц (внутреннее объединение)
+SELECT `cities.id`, `cities.city`, `countries.name`, `countries.currency_code`
+FROM `cities`
+INNER JOIN `countries`
+ON `cities.countries_id` = `countries.id`
+LIMIT 20 OFFSET 0;
