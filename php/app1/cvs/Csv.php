@@ -16,6 +16,7 @@ class Csv
      * Csv constructor.
      *
      * @param string $path
+     *
      * @throws \Exception
      */
     public function __construct($path)
